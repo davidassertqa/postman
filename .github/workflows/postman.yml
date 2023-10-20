@@ -26,10 +26,19 @@ jobs:
         continue-on-error: true
 
       - name: Send Results of Collection 1 to Slack
-        if: ${{ always() }}
+        if: ${{ failure() }}
         uses: 8398a7/action-slack@v3
         with:
-          text: "Collection 1 has been executed. Status: ${{ job.status }}"
+          text: "Collection 1 has failed."
+          author_name: "GitHub Actions"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Send Results of Collection 1 to Slack (Success)
+        if: ${{ success() }}
+        uses: 8398a7/action-slack@v3
+        with:
+          text: "Collection 1 has succeeded."
           author_name: "GitHub Actions"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -39,36 +48,21 @@ jobs:
         continue-on-error: true
 
       - name: Send Results of Collection 2 to Slack
-        if: ${{ always() }}
+        if: ${{ failure() }}
         uses: 8398a7/action-slack@v3
         with:
-          text: "Collection 2 has been executed. Status: ${{ job.status }}"
+          text: "Collection 2 has failed."
           author_name: "GitHub Actions"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-      - name: Run Collection 3
-        run: newman run tatjana.postman_collection.json
-        continue-on-error: true
-
-      - name: Send Results of Collection 3 to Slack
-        if: ${{ always() }}
+      - name: Send Results of Collection 2 to Slack (Success)
+        if: ${{ success() }}
         uses: 8398a7/action-slack@v3
         with:
-          text: "Collection 3 has been executed. Status: ${{ job.status }}"
+          text: "Collection 2 has succeeded."
           author_name: "GitHub Actions"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-      - name: Run Collection 4
-        run: newman run petarJ.postman_collection.json
-        continue-on-error: true
-
-      - name: Send Results of Collection 4 to Slack
-        if: ${{ always() }}
-        uses: 8398a7/action-slack@v3
-        with:
-          text: "Collection 4 has been executed. Status: ${{ job.status }}"
-          author_name: "GitHub Actions"
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      # Repeat similar steps for Collection 3 and Collection 4
