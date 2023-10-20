@@ -1,0 +1,564 @@
+{
+	"info": {
+		"_postman_id": "74945254-1edf-4cbe-afe5-6d9e75d83723",
+		"name": "Vuk Polovni Automobili",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22619291"
+	},
+	"item": [
+		{
+			"name": "Polovni automobili Copy",
+			"item": [
+				{
+					"name": "01. Positive",
+					"item": [
+						{
+							"name": "01. Email registration",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var usedEmail = \"{{$randomEmail}}\";\r",
+											"pm.environment.set(\"rendomImejl\", usedEmail);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"'Polovni Automobili' set as environment\", () => {\r",
+											"  pm.expect(pm.environment.name).to.eql(\"Polovni Automobili\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Successful POST request\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Header response URL is 'https://www.polovniautomobili.com'\", () => {\r",
+											"  pm.expect(pm.response.headers.get(\"access-control-allow-origin\")).to.eql(\"https://www.polovniautomobili.com\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Success message is displayed\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Hvala na registraciji!\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "www.polovniautomobili.com"
+									},
+									{
+										"key": "accept",
+										"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									},
+									{
+										"key": "cache-control",
+										"value": "max-age=0"
+									},
+									{
+										"key": "content-type",
+										"value": "application/x-www-form-urlencoded"
+									},
+									{
+										"key": "cookie",
+										"value": "pa-cookie-message=accepted; _pubcid=c3b67ceb-bf70-4a8b-9c54-19b3fc6bd056; cto_bidid=2oMXbF9lRUswUVhUeGZRWE5RM29NV1FNMDlhaiUyRmJrblYlMkZhSzAxaFBtNzBPVEdxam1TTUpEdEEwTEc2Z1hPUnVJS0JMQXR2UjNlN3BiZU03Rjl6NkxxNWNEUDhBT1RiTSUyRnJTa1hoMnp2OG01bE1SYyUzRA; cto_bundle=1sRY-196OHYlMkJCamglMkJ5d1RIT25lM2NqbSUyRmRPYUE0OXY0VCUyQkZRWjZ1azhpJTJGMnR6Y1hmU0daNk1TUElEdWx2YjhlNExTMkg5SkU2NFFZdzlxQkxtWFZLS1gzRG9uM2tOeDNkJTJCOTVFSnJTa3ZIdlp1S2kzT2xCQUV2TmJPMHNjQ2VDMUFyVQ; stpdOrigin={\"origin\":\"organic\"}; _gid=GA1.2.193780104.1697445695; _gcl_au=1.1.1291556242.1697445695; global-notification-dont-check=1; _pbjs_userid_consent_data=3524755945110770; _fbp=fb.1.1697445696452.2144001518; cto_bundle=IJ9BcF96OHYlMkJCamglMkJ5d1RIT25lM2NqbSUyRmRJSTltQnplZVJOZXhVS1VqT1puR1RLRU9RVWJwZUt0VmZOcTIwZjlpdG94JTJGdSUyRk4xdGg3UXRQVXphazU5bzdROE1WTndIMWM1Q0F1V0ZxUGpCV1J4c0lMU21ZTiUyQm5DbCUyQkJkSG9HJTJGdllMUWxyZFJ1SVNuQ0hFQlNVRXBPaE1JSyUyQkxmSTJJQyUyQm1rWjdIMkpWZTk1WHVsSSUzRA; cto_bundle=IJ9BcF96OHYlMkJCamglMkJ5d1RIT25lM2NqbSUyRmRJSTltQnplZVJOZXhVS1VqT1puR1RLRU9RVWJwZUt0VmZOcTIwZjlpdG94JTJGdSUyRk4xdGg3UXRQVXphazU5bzdROE1WTndIMWM1Q0F1V0ZxUGpCV1J4c0lMU21ZTiUyQm5DbCUyQkJkSG9HJTJGdllMUWxyZFJ1SVNuQ0hFQlNVRXBPaE1JSyUyQkxmSTJJQyUyQm1rWjdIMkpWZTk1WHVsSSUzRA; cto_bidid=tqXoGl9lRUswUVhUeGZRWE5RM29NV1FNMDlhaiUyRmJrblYlMkZhSzAxaFBtNzBPVEdxam1TTUpEdEEwTEc2Z1hPUnVJS0JMQUpjayUyQkFpaSUyQiUyRjNaNTIwVERKV1lYN1o5JTJGZFNpOGxjTWk5dmJIOHdVZzNWRFZ4NG1mSk5sN284YVZ6ZjNydkpRaQ; cto_bidid=tqXoGl9lRUswUVhUeGZRWE5RM29NV1FNMDlhaiUyRmJrblYlMkZhSzAxaFBtNzBPVEdxam1TTUpEdEEwTEc2Z1hPUnVJS0JMQUpjayUyQkFpaSUyQiUyRjNaNTIwVERKV1lYN1o5JTJGZFNpOGxjTWk5dmJIOHdVZzNWRFZ4NG1mSk5sN284YVZ6ZjNydkpRaQ; __gads=ID=3a9f5e8d00cd5020:T=1672746373:RT=1697445696:S=ALNI_MYNDp1vCHCTowt4tquYYtK-GDJS8Q; __gpi=UID=00000b9c57c1b5bb:T=1672746373:RT=1697445696:S=ALNI_MbZrQmf8sRm3pcSnTz6jHBNVsQpug; _ga_QBY7EP0X15=GS1.1.1697445696.2.0.1697445697.59.0.0; am-uid-f=02a40708-ef47-4edf-90e2-57525152c747; device_view=full; _ga=GA1.2.2145259851.1672746372"
+									},
+									{
+										"key": "origin",
+										"value": "https://www.polovniautomobili.com"
+									},
+									{
+										"key": "referer",
+										"value": "https://www.polovniautomobili.com/registracija"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Google Chrome\";v=\"117\", \"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"117\""
+									},
+									{
+										"key": "sec-ch-ua-mobile",
+										"value": "?0"
+									},
+									{
+										"key": "sec-ch-ua-platform",
+										"value": "\"Windows\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "document"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "navigate"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "sec-fetch-user",
+										"value": "?1"
+									},
+									{
+										"key": "upgrade-insecure-requests",
+										"value": "1"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "{{rendomImejl}}",
+											"type": "text"
+										},
+										{
+											"key": "password[first]",
+											"value": "{{password}}",
+											"type": "text"
+										},
+										{
+											"key": "password[second]",
+											"value": "{{repeatPassword}}",
+											"type": "text"
+										},
+										{
+											"key": "tos",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseURL}}/registracija",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"registracija"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "02. Cellphone registration",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Environment set to 'Polovni Automobili'\", () => {\r",
+											"  pm.expect(pm.environment.name).to.eql(\"Polovni Automobili\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Multiple responses assertion\", function () {\r",
+											"  if (pm.response.code === 200) {\r",
+											"      pm.expect(jsonData.error).to.eql(false);\r",
+											"      pm.expect(jsonData.message).to.eql(\"Uspe\\u0161no Vam je poslata SMS poruka sa kodom za aktivaciju naloga.\");\r",
+											"\r",
+											"} else if (pm.response.code === 429) {\r",
+											"      pm.expect(jsonData.error).to.eql(true);\r",
+											"      pm.expect(jsonData.message).to.eql(\"Prekora\\u010dili ste maksimalan broj poku\\u0161aja za potvrdu putem sms-a. Poku\\u0161ajte ponovo za 24h ili aktivirajte Vas nalog preko email-a.\");\r",
+											"}\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status 200 generates correct message and error status\", function () {\r",
+											"    pm.expect(jsonData.error).to.eql(false);\r",
+											"    pm.expect(jsonData.message).to.eql(\"Uspe\\u0161no Vam je poslata SMS poruka sa kodom za aktivaciju naloga.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status 429 generates correct message and error status\", function () {\r",
+											"    pm.expect(jsonData.error).to.eql(true);\r",
+											"    pm.expect(jsonData.message).to.eql(\"Prekora\\u010dili ste maksimalan broj poku\\u0161aja za potvrdu putem sms-a. Poku\\u0161ajte ponovo za 24h ili aktivirajte Vas nalog preko email-a.\");\r",
+											"    \r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Header URL response is 'https://www.polovniautomobili.com'\", () => {\r",
+											"  pm.expect(pm.response.headers.get(\"access-control-allow-origin\")).to.eql(\"*, https://www.polovniautomobili.com\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var sedmocifreniBrojVuk = Math.floor(1000000 + Math.random() * 9000000);",
+											"pm.environment.set(\"7digitV1\", sedmocifreniBrojVuk);",
+											"",
+											"var sedmocifreniBrojMarko = Math.floor((Math.random() * 9999999) + 1000000);",
+											"pm.environment.set(\"7digitV2\", sedmocifreniBrojMarko);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "www.polovniautomobili.com"
+									},
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "accept-language",
+										"value": "en-US,en;q=0.9"
+									},
+									{
+										"key": "content-type",
+										"value": "application/x-www-form-urlencoded; charset=UTF-8"
+									},
+									{
+										"key": "cookie",
+										"value": "global-notification-dont-check=1; pa-cookie-message=accepted; stpdOrigin={\"origin\":\"organic\"}; _gcl_au=1.1.1414104388.1697460850; _gid=GA1.2.1399371475.1697460850; _gat=1; _pbjs_userid_consent_data=3524755945110770; _fbp=fb.1.1697460850587.1518113235; cto_bundle=vFoAul9PWmFVTXRGZ0IxeFRzMzJWT1l3UmFJUjUwNlZRRiUyQjQxSHdMQWJkbjVCdlJ3JTJGR0hQJTJCbktGZEJhU3N2JTJGc1FGTEwlMkJtZjFOcUxtTlZDMGcwMmJRYmVsbUliJTJGb29VbU95WU10OFhjUnJ6clN1dUlZdmM2TkVVWUNHJTJGTWZLdkhUZHU2eGFWWno5dHpEWXgxVHlEVVIlMkYlMkJINFpvTFd2QTBCMjExeTNtRm5oNjNsbXJpOWFCekFia042Z3hYbzN3Q0owRFdJbVUlMkJ2dUVSM2tjbzgyTjVra2k2JTJGdyUzRCUzRA; cto_bidid=zvOKuV83ZHRnM3pqOU9MUTEyakM3M0lyNUtGVE9Mcnk5SkdRdkxQSXoyczNVR2hpdFIyaU1hQm0yZ1clMkY3UVRuVEFJWU40YklTeUkzREpmdkdnTEUwU3gxQ3FJMUEwMDlyODBmMzhzUTlTMUxYY2pVaHlUQXhUdXVON2ViWTJkU3hCZEZ3M2FiZDJ4Rm4wdmhTU3N3NzZaZWxYUSUzRCUzRA; am-uid-f=a6e1aed2-3e43-4173-a2e2-27586e4efff3; device_view=full; _ga_QBY7EP0X15=GS1.1.1697460850.1.0.1697460851.59.0.0; _ga=GA1.2.904144651.1697460850"
+									},
+									{
+										"key": "origin",
+										"value": "https://www.polovniautomobili.com"
+									},
+									{
+										"key": "referer",
+										"value": "https://www.polovniautomobili.com/registracija"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Google Chrome\";v=\"117\", \"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"117\""
+									},
+									{
+										"key": "sec-ch-ua-mobile",
+										"value": "?0"
+									},
+									{
+										"key": "sec-ch-ua-platform",
+										"value": "\"macOS\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "x-requested-with",
+										"value": "XMLHttpRequest"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "prefix=065&number={{v2}}"
+								},
+								"url": {
+									"raw": "{{baseURL}}/sms-code",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"sms-code"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "02. Negative",
+					"item": [
+						{
+							"name": "03. Minimum negative limit value",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var petocifreniBrojVuk = Math.floor(10000 + Math.random() * 90000);\r",
+											"pm.environment.set(\"5digit\", petocifreniBrojVuk);\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"'Polovni Automobili' set as environment\", () => {\r",
+											"  pm.expect(pm.environment.name).to.eql(\"Polovni Automobili\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"const jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Error exists\", function () {\r",
+											"    pm.expect(jsonData.error).to.eql(true);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Correct message generated\", function () {\r",
+											"    pm.expect(jsonData.message).to.eql(\"Došlo je do greške pri slanju aktivacionog koda, molimo Vas proverite da li je uneti ispravan telefonski broj i pokušajte ponovo.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cookie is generated in response headers\", () => {\r",
+											"  pm.expect(pm.response.headers.get(\"set-cookie\")).to.contain(\"PHPSESSID\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "prefix=060&number={{5digit}}"
+								},
+								"url": {
+									"raw": "{{baseURL}}/sms-code",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"sms-code"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "04. Maximum negative limit value",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var osmocifreniBrojVuk = Math.floor(10000000 + Math.random() * 90000000);\r",
+											"pm.environment.set(\"8digit\", osmocifreniBrojVuk);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"'Polovni Automobili' set as environment\", () => {\r",
+											"  pm.expect(pm.environment.name).to.eql(\"Polovni Automobili\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"const jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Error exists\", function () {\r",
+											"    pm.expect(jsonData.error).to.eql(true);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Correct message generated\", function () {\r",
+											"    pm.expect(jsonData.message).to.eql(\"Došlo je do greške pri slanju aktivacionog koda, molimo Vas proverite da li je uneti ispravan telefonski broj i pokušajte ponovo.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cookie is generated in response headers\", () => {\r",
+											"  pm.expect(pm.response.headers.get(\"set-cookie\")).to.contain(\"PHPSESSID\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "prefix=061&number={{8digit}}"
+								},
+								"url": {
+									"raw": "{{baseURL}}/sms-code",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"sms-code"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "05. Empty phone number field",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"'Polovni Automobili' set as environment\", () => {\r",
+											"  pm.expect(pm.environment.name).to.eql(\"Polovni Automobili\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"const jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Error exists\", function () {\r",
+											"    pm.expect(jsonData.error).to.eql(true);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Correct message generated\", function () {\r",
+											"    pm.expect(jsonData.message).to.eql(\"Došlo je do greške pri slanju aktivacionog koda, molimo Vas proverite da li je uneti ispravan telefonski broj i pokušajte ponovo.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cookie is generated in response headers\", () => {\r",
+											"  pm.expect(pm.response.headers.get(\"set-cookie\")).to.contain(\"PHPSESSID\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "prefix=062&number="
+								},
+								"url": {
+									"raw": "{{baseURL}}/sms-code",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"sms-code"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "06. Empthy prefix field",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var sestocifreniBroj = Math.floor(100000 + Math.random() * 900000);\r",
+											"pm.environment.set(\"6digit\", sestocifreniBroj);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"'Polovni Automobili' set as environment\", () => {\r",
+											"  pm.expect(pm.environment.name).to.eql(\"Polovni Automobili\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"const jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Error exists\", function () {\r",
+											"    pm.expect(jsonData.error).to.eql(true);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Correct message generated\", function () {\r",
+											"    pm.expect(jsonData.message).to.eql(\"Došlo je do greške pri slanju aktivacionog koda, molimo Vas proverite da li je uneti ispravan telefonski broj i pokušajte ponovo.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cookie is generated in response headers\", () => {\r",
+											"  pm.expect(pm.response.headers.get(\"set-cookie\")).to.contain(\"PHPSESSID\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "prefix=&number={{6digit}}"
+								},
+								"url": {
+									"raw": "{{baseURL}}/sms-code",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"sms-code"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
