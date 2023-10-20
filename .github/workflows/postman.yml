@@ -26,6 +26,7 @@ jobs:
         continue-on-error: true
 
       - name: Send Results of Collection 1 to Slack
+        if: ${{ always() }}
         uses: 8398a7/action-slack@v3
         with:
           text: "Collection 1 has been executed. Status: ${{ job.status }}"
@@ -38,6 +39,7 @@ jobs:
         continue-on-error: true
 
       - name: Send Results of Collection 2 to Slack
+        if: ${{ always() }}
         uses: 8398a7/action-slack@v3
         with:
           text: "Collection 2 has been executed. Status: ${{ job.status }}"
@@ -50,6 +52,7 @@ jobs:
         continue-on-error: true
 
       - name: Send Results of Collection 3 to Slack
+        if: ${{ always() }}
         uses: 8398a7/action-slack@v3
         with:
           text: "Collection 3 has been executed. Status: ${{ job.status }}"
@@ -62,6 +65,7 @@ jobs:
         continue-on-error: true
 
       - name: Send Results of Collection 4 to Slack
+        if: ${{ always() }}
         uses: 8398a7/action-slack@v3
         with:
           text: "Collection 4 has been executed. Status: ${{ job.status }}"
