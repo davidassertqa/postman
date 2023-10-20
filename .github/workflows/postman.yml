@@ -38,7 +38,7 @@ jobs:
         continue-on-error: true
 
       - name: Send Results to Slack
-        uses: 8398a7/action-slack@v4
+        uses: 8398a7/action-slack@v3  # Specify the available version (e.g., v3)
         with:
           text: "Postman collections have been executed."
           author_name: "GitHub Actions"
