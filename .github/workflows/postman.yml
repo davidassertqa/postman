@@ -1,0 +1,36 @@
+name: Run Postman Collections
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run_postman_collections:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Run Collection 1
+        run: newman run Petar Jovanovic.postman_collection.json
+
+      - name: Run Collection 2
+        run: newman run Petar S New Collection.postman_collection (1).json
+
+      - name: Run Collection 3
+        run: newman run Tatjana_Varijable.postman_collection.json
+       
+
+      - name: Run Collection 4
+        run: newman run Vuk Polovni Automobili.postman_collection.json
+ 
