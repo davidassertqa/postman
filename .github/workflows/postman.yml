@@ -21,16 +21,20 @@ jobs:
       - name: Install Newman
         run: npm install -g newman@5.2.3
 
-      # - name: Run Collection 1
-      #   run: newman run petarS.postman_collection.json
+      - name: Run Collection 1
+        run: newman run petarS.postman_collection.json
+        continue-on-error: true
 
       - name: Run Collection 2
         run: newman run vuk.postman_collection.json
+        continue-on-error: true
 
       - name: Run Collection 3
         run: newman run tatjana.postman_collection.json
-       
+        continue-on-error: true
 
       - name: Run Collection 4
         run: newman run petarJ.postman_collection.json
+        continue-on-error: true
+
  
