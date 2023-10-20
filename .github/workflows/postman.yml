@@ -44,5 +44,6 @@ jobs:
           author_name: "GitHub Actions"
           status: ${{ job.status }}
         env:
-          SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
 
