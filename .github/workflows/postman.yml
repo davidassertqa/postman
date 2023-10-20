@@ -22,15 +22,15 @@ jobs:
         run: npm install -g newman@5.2.3
 
       - name: Run Collection 1
-        run: newman run Petar Jovanovic.postman_collection.json
+        run: newman run petarS.postman_collection.json
 
-      - name: Run Collection 2
-        run: newman run Petar S New Collection.postman_collection (1).json
+      # - name: Run Collection 2
+      #   run: newman run Petar S New Collection.postman_collection (1).json
 
-      - name: Run Collection 3
-        run: newman run Tatjana_Varijable.postman_collection.json
+      # - name: Run Collection 3
+      #   run: newman run Tatjana_Varijable.postman_collection.json
        
 
-      - name: Run Collection 4
-        run: newman run Vuk Polovni Automobili.postman_collection.json
+      # - name: Run Collection 4
+      #   run: newman run Vuk Polovni Automobili.postman_collection.json
  
