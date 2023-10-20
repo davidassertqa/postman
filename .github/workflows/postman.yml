@@ -42,5 +42,7 @@ jobs:
         with:
           text: "Postman collections have been executed."
           author_name: "GitHub Actions"
+          status: ${{ job.status }}
+
         env:
           SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
