@@ -1,0 +1,428 @@
+{
+	"info": {
+		"_postman_id": "e814dcfb-2787-4b8a-b1bd-5f4640b02caf",
+		"name": "Varijable",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15759976"
+	},
+	"item": [
+		{
+			"name": "create_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var user_id = jsonData.user_id;",
+							"pm.environment.set(\"user_id\", user_id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Status code is not one of 4xx\", function () {",
+							"    pm.expect(pm.response.code).not.to.be.oneOf([400, 401, 402, 403, 404]);",
+							"})",
+							"",
+							"pm.test(\"Successful POST request code eq 201\", function () {",
+							"    pm.expect(pm.response.code).to.eq(201);",
+							"});",
+							"",
+							"pm.test(\"Successful POST request code not eq 200\", function () {",
+							"    pm.expect(pm.response.code).to.not.eq(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string 'Created'\", () => {",
+							"  pm.response.to.have.status(\"Created\");",
+							"});",
+							"",
+							"pm.test(\"Body matches string 'user_id'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"user_id\");",
+							"});",
+							"",
+							"pm.test(\"nickname - Key-Value pair mathces \", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.nickname).to.eql(\"nadimak\");",
+							"});",
+							"",
+							"pm.test(\"Content-Type header is present\", () => {",
+							"  pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"pm.test(\"Content-Type header contains application/json\", () => {",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.contains('application/json');",
+							"});",
+							"",
+							"pm.test(\"Date header is present\", () => {",
+							"  pm.response.to.have.header(\"Date\");",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"    ",
+							"pm.test(\"Object (email_verified, given_name) is contained\", () => {",
+							"  const expectedObject = {",
+							"    \"email_verified\": true,",
+							"    \"given_name\": 'ime'",
+							"  };",
+							"  pm.expect(pm.response.json()).to.deep.include(expectedObject);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{api_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"{{$randomEmail}}\",\n    \"user_metadata\": {},\n    \"blocked\": false,\n    \"email_verified\": true,\n    \"app_metadata\": {},\n    \"given_name\": \"ime\",\n    \"family_name\": \"prezime\",\n    \"name\": \"imeiprezime\",\n    \"nickname\": \"nadimak\",\n    \"connection\": \"Username-Password-Authentication\",\n    \"password\": \"P@ssw0rd\",\n    \"verify_email\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev-yb258xga0hjuwi05.us.auth0.com/api/v2/users",
+					"protocol": "https",
+					"host": [
+						"dev-yb258xga0hjuwi05",
+						"us",
+						"auth0",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string 'OK'\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test(\"Status code is not one of 4xx\", function () {",
+							"    pm.expect(pm.response.code).not.to.be.oneOf([400, 401, 402, 403, 404]);",
+							"})",
+							"",
+							"pm.test(\"Successful GET request code eq 200\", function () {",
+							"    pm.expect(pm.response.code).to.eq(200);",
+							"});",
+							"",
+							"pm.test(\"Body matches string 'user_id'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"user_id\");",
+							"});",
+							"",
+							"pm.test(\"connection - Key-Value pair mathces \", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.identities[0].connection).to.eql(\"Username-Password-Authentication\");",
+							"});",
+							"",
+							"pm.test(\"Content-Type header is present\", () => {",
+							"  pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"pm.test(\"Content-Type header contains application/json\", () => {",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.contains('application/json');",
+							"});",
+							"",
+							"pm.test(\"Date header is present\", () => {",
+							"  pm.response.to.have.header(\"Date\");",
+							"});",
+							"",
+							"pm.test(\"Response time is more than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.above(200);",
+							"});",
+							"",
+							"pm.test(\"Object (blocked, name) is contained\", () => {",
+							"  const expectedObject = {",
+							"    \"blocked\": false,",
+							"    \"name\": 'imeiprezime'",
+							"  };",
+							"  pm.expect(pm.response.json()).to.deep.include(expectedObject);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{api_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://dev-yb258xga0hjuwi05.us.auth0.com/api/v2/users/{{user_id}}",
+					"protocol": "https",
+					"host": [
+						"dev-yb258xga0hjuwi05",
+						"us",
+						"auth0",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Status code is not one of 4xx\", function () {",
+							"    pm.expect(pm.response.code).not.to.be.oneOf([400, 401, 402, 403, 404]);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string 'OK'\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test(\"Body matches string 'PROMENJENO'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"PROMENJENO\");",
+							"});",
+							"",
+							"pm.test(\"name - Key-Value pair mathces \", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"PROMENJENO\");",
+							"});",
+							"",
+							"pm.test(\"Content-Type header is present\", () => {",
+							"  pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"pm.test(\"Content-Type header contains charset=utf-8\", () => {",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.contains('charset=utf-8');",
+							"});",
+							"",
+							"pm.test(\"Date header is present\", () => {",
+							"  pm.response.to.have.header(\"Date\");",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 3500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(350);",
+							"});",
+							"",
+							"pm.test(\"Object (blocked, nickname) is contained\", () => {",
+							"  const expectedObject = {",
+							"    \"blocked\": false,",
+							"    \"nickname\": 'nadimak'",
+							"  };",
+							"  pm.expect(pm.response.json()).to.deep.include(expectedObject);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{api_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{{izmena}}"
+				},
+				"url": {
+					"raw": "https://dev-yb258xga0hjuwi05.us.auth0.com/api/v2/users/{{user_id}}",
+					"protocol": "https",
+					"host": [
+						"dev-yb258xga0hjuwi05",
+						"us",
+						"auth0",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"No Content\");",
+							"});",
+							"",
+							"pm.test(\"Status code is not one of 4xx\", function () {",
+							"    pm.expect(pm.response.code).not.to.be.oneOf([400, 401, 402, 403, 404]);",
+							"})",
+							"",
+							"pm.test(\"Successful DELETE request code eq 204\", function () {",
+							"    pm.expect(pm.response.code).to.eq(204);",
+							"});",
+							"",
+							"pm.test(\"Content-Type header is present\", () => {",
+							"  pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"pm.test(\"Content-Type header contains charset=utf-8\", () => {",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.contains('charset=utf-8');",
+							"});",
+							"",
+							"pm.test(\"Date header is present\", () => {",
+							"  pm.response.to.have.header(\"Date\");",
+							"});",
+							"",
+							"pm.test(\"Response time is more than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.above(200);",
+							"});",
+							"",
+							"pm.test(\"Body is correct (empty)\", function () {",
+							"    //pm.response.to.have.body(\"\");",
+							"    pm.response.to.not.have.body;",
+							"});",
+							"",
+							"pm.test(\"response should be okay to process\", function () {",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.not.have.jsonBody(\"error\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{api_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://dev-yb258xga0hjuwi05.us.auth0.com/api/v2/users/{{user_id}}",
+					"protocol": "https",
+					"host": [
+						"dev-yb258xga0hjuwi05",
+						"us",
+						"auth0",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "izmena",
+			"value": "{\"name\":\"PROMENJENO\"}",
+			"type": "string"
+		}
+	]
+}

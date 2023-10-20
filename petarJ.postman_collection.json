@@ -1,0 +1,281 @@
+{
+	"info": {
+		"_postman_id": "bd9277c8-8fbe-4b27-8c40-80c421a5d039",
+		"name": "Petar Jovanovic",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27160364"
+	},
+	"item": [
+		{
+			"name": "1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code name is OK\", () => {\r",
+							"  pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 1500ms\", () => {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    \r",
+							"    const responseJson = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseJson).to.have.property(\"page\");\r",
+							"    pm.expect(responseJson).to.have.property(\"per_page\");\r",
+							"    pm.expect(responseJson).to.have.property(\"total\");\r",
+							"    pm.expect(responseJson).to.have.property(\"total_pages\");\r",
+							"    pm.expect(responseJson).to.have.property(\"data\");\r",
+							"    pm.expect(responseJson.data).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Expected response in data\", function () {\r",
+							"  \r",
+							"  var jsonData = pm.response.json();\r",
+							"\r",
+							"  pm.expect(jsonData.data[1].id).to.eql(2);\r",
+							"  pm.expect(jsonData.data[1].email).to.eql('janet.weaver@reqres.in');\r",
+							"  pm.expect(jsonData.data[1].first_name).to.eql('Janet');\r",
+							"  pm.expect(jsonData.data[1].last_name).to.eql('Weaver');\r",
+							"  pm.expect(jsonData.data[1].avatar).to.be.a('String');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Date header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Date\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Date header is string\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Date')).to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Connection header is keep-alive\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Connection')).to.eql('keep-alive');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json; charset=utf-8\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Vary header is Accept-Encoding\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Vary')).to.eql('Accept-Encoding');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is not 201 \", function () {\r",
+							"  pm.response.to.not.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code name is not CREATED\", () => {\r",
+							"  pm.response.to.not.have.status(\"CREATED\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is not less than 100ms\", () => {\r",
+							"  pm.expect(pm.response.responseTime).to.not.be.below(100);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Petar\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    \r",
+							"    const responseJson = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseJson).to.have.property(\"count\");\r",
+							"    pm.expect(responseJson).to.have.property(\"entries\");\r",
+							"    pm.expect(responseJson).to.not.have.property(\"id\");\r",
+							"    pm.expect(responseJson.entries).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Expected response in entries\", function () {\r",
+							"  \r",
+							"  var jsonData = pm.response.json();\r",
+							"\r",
+							"  pm.expect(jsonData.entries[3].Description).to.eql('Cat as a service (cats pictures and gifs)');\r",
+							"  pm.expect(jsonData.entries[3].Description).to.not.eql('Cat as a service (cats pictures and gifs)123');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains count\",() => {\r",
+							"  pm.expect(pm.response.text()).to.include(\"count\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Server header is Caddy\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Server')).to.eql('Caddy');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Authorization header is not present\", () => {\r",
+							"  pm.response.to.not.have.header(\"Authorization\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.publicapis.org/entries",
+					"protocol": "https",
+					"host": [
+						"api",
+						"publicapis",
+						"org"
+					],
+					"path": [
+						"entries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 \", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Successful GET request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code name is OK\", () => {\r",
+							"  pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"name\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    \r",
+							"    const responseJson = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseJson).to.have.property(\"count\");\r",
+							"    pm.expect(responseJson).to.have.property(\"name\");\r",
+							"    pm.expect(responseJson).to.have.property(\"country\");\r",
+							"    pm.expect(responseJson.country).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Expected response in country\", function () {\r",
+							"  \r",
+							"  var jsonData = pm.response.json();\r",
+							"\r",
+							"  pm.expect(jsonData.country[0].country_id).to.eql(\"GH\");\r",
+							"  pm.expect(jsonData.country[0].probability).to.eql(0.209);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"cache-control header is max-age=0, private, must-revalidate\", () => {\r",
+							"  pm.expect(pm.response.headers.get('cache-control')).to.eql('max-age=0, private, must-revalidate');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"x-rate-limit-limit header is present\", () => {\r",
+							"  pm.response.to.have.header(\"x-rate-limit-limit\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"x-rate-limit-remaining header is present\", () => {\r",
+							"  pm.response.to.have.header(\"x-rate-limit-remaining\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"x-rate-limit-reset header is present\", () => {\r",
+							"  pm.response.to.have.header(\"x-rate-limit-reset\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nationalize.io?name=nathaniel",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nationalize",
+						"io"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "nathaniel"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
