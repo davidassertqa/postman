@@ -1,3 +1,5 @@
+name: Run Postman Collections and Send Results to Slack
+
 on:
   push:
     branches:
@@ -19,27 +21,29 @@ jobs:
       - name: Install Newman
         run: npm install -g newman@5.2.3
 
-      - name: Run Collection 1
-        run: newman run petarS.postman_collection.json
+      - name: Run Collection 1 and Generate HTML Report
+        run: newman run petarS.postman_collection.json --reporters cli,html
         continue-on-error: true
 
-      - name: Run Collection 2
-        run: newman run vuk.postman_collection.json
+      - name: Create Newman Report Gist
+        run: |
+          cat newman/HTMLReport.html > report.html
+          gist create -d "Postman Collection 1 Results" report.html
         continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GIT }}
 
-      - name: Run Collection 3
-        run: newman run tatjana.postman_collection.json
-        continue-on-error: true
-
-      - name: Run Collection 4
-        run: newman run petarJ.postman_collection.json
+      - name: Get Gist URL
+        id: get_gist
+        run: |
+          echo "::set-output name=gist_url::$(gist ls -a | grep 'Postman Collection 1 Results' | awk '{print $1}')"
         continue-on-error: true
 
       - name: Send Results to Slack
-        uses: 8398a7/action-slack@v3  # Specify the available version (e.g., v3)
+        if: always()
+        uses: 8398a7/action-slack@v3
         with:
-          text: "Postman collections have been executed."
+          text: "Postman Collection 1 Results: ${{ steps.get_gist.outputs.gist_url }}"
           author_name: "GitHub Actions"
-          status: ${{ job.status }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
