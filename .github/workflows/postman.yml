@@ -45,5 +45,6 @@ jobs:
         with:
           text: "Postman Collection 1 Results: ${{ steps.get_gist.outputs.gist_url }}"
           author_name: "GitHub Actions"
+          status: 'success'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
