@@ -1,5 +1,3 @@
-name: Run Postman Collections
-
 on:
   push:
     branches:
@@ -38,10 +36,10 @@ jobs:
         continue-on-error: true
 
       - name: Send Results to Slack
-        if: always()  # This step will always run
-        uses: 8398a7/action-slack@v3
+        uses: 8398a7/action-slack@v3  # Specify the available version (e.g., v3)
         with:
-          text: "Postman collections have been executed. Status: Passed"
+          text: "Postman collections have been executed."
           author_name: "GitHub Actions"
+          status: ${{ job.status }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
