@@ -19,7 +19,7 @@ jobs:
           node-version: 16
 
       - name: Install Newman
-        run: npm install -g newman
+        run: npm install -g newman@5.2.3
 
       - name: Run Collection 1
         run: newman run Petar Jovanovic.postman_collection.json
